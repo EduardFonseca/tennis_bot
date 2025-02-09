@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <arg name="world" default="empty" />
+    <!-- Include empty world -->
+    <arg name="ns" default="p3dx"/>
+    <arg name="x" default="0.0" />
+    <arg name="y" default="0.0" />
+    <arg name="z" default="0.0" />
+
+    <!-- Start Gazebo empty_world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" required="true">
+        <arg name="world_name" value="$(find gazebo_ros)/worlds/$(arg world).world"/>
+    </include>
+
+    <!-- Spawn p3dx robot if gazebo is oppened -->
+    <include file="$(find p3dx_gazebo)/launch/p3dx.launch" required="true">
+        <arg name="ns" value="$(arg ns)"/>
+        <arg name="x" value="$(arg x)"/>
+        <arg name="y" value="$(arg y)"/>
+        <arg name="z" value="$(arg z)"/> 
+    </include>
+  
+</launch>
