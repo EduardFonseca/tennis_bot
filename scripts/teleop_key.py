@@ -36,7 +36,7 @@ def on_press(key):
 
 def on_release(key):
     global twist
-    if key == Key.esc or KeyboardInterrupt():
+    if key == Key.esc:
         return False  # Stop listener on ESC key
     
     # Stop movement when key is released
@@ -68,10 +68,12 @@ def laser_callback(msg):
         # Stop movement if an obstacle is closer than 0.5m and in front of the robot (angle < 30 degrees)
         if min_distance < 0.5 and not (min_ang > 45 or min_ang < -45):
             rospy.logwarn("Obstacle detected! Stopping robot.")
-            twist.linear.x = 0.0
-            twist.angular.z = 0.0
-            stop_robot = True
+            if not stop_robot:
+                twist.linear.x = 0.0
+                twist.angular.z = 0.0
+                stop_robot = True
         else:
+            rospy.logerr("No obstacle detected.")
             stop_robot = False
 
 def robot_control():
