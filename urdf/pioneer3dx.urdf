@@ -498,6 +498,56 @@ work original in ucs-ros-pkg.
     <color rgba="0.5 0.25 0 1"/>
   </material>
 
+  <material name="pink">
+    <color rgba="1 0.078 0.576 1"/>
+  </material>
+
+  <link name="z_cilinder_joint">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="pink"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <collision>
+        <geometry>
+          <cylinder length="0.05" radius="0.025"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+    </visual>
+  </link>
+
+  <joint name="z_cilinder_joint_to_robot" type="continuous">
+    <parent link="top_plate"/>
+    <child link="z_cilinder_joint"/>
+    <origin rpy="0 0 0" xyz="-0.2 0 0.025"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="y_cilinder_joint">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="pink"/>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <collision>
+        <geometry>
+          <cylinder length="0.05" radius="0.025"/>
+        </geometry>
+        <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      </collision>
+    </visual>
+  </link>
+
+  <joint name="y_cilinder_joint_to_robot" type="continuous">
+    <parent link="z_cilinder_joint"/>
+    <child link="y_cilinder_joint"/>
+    <origin rpy="0 0 0" xyz="0 0 0.025"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
   <link name="handle">
     <visual>
       <geometry>
@@ -514,11 +564,10 @@ work original in ucs-ros-pkg.
     </visual>
   </link>
 
-  <joint name="handle_to_robot" type="continuous">
-    <parent link="top_plate"/>
+  <joint name="handle_to_robot" type="fixed">
+    <parent link="y_cilinder_joint"/>
     <child link="handle"/>
-    <origin rpy="0 0.78539816339 0" xyz="-0.2 0 0.05"/>
-    <axis xyz="0 1 0"/>
+    <origin rpy="0 0.78539816339 0" xyz="0 0 0"/>
   </joint>
 
   <link name="brush_support">
