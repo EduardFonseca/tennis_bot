@@ -67,8 +67,8 @@ def callback(msg):
     global pub, obstacles
 
     # Constants
-    K_att = 0.2
-    K_rep = 0.01
+    K_att = 0.3
+    K_rep = 0.001
     e_0 = 4
 
     v_max = 0.5
@@ -76,7 +76,7 @@ def callback(msg):
     DELTA = 0.01
 
     # Goal_position
-    goal_x = 15
+    goal_x = 9
     goal_y = 0
 
     # Aquire robot position
