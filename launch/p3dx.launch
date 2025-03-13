@@ -13,15 +13,19 @@
     </include>
 
     <!-- Carrega a descrição do robô no ROS Parameter Server antes de spawná-lo -->
-    <param name="/robot_description" command="$(find xacro)/xacro --inorder $(find p3dx_description)/urdf/pioneer3dx.xacro"/>
+    <param name="/robot_description" command="$(find xacro)/xacro --inorder $(find tennis_bot)/urdf/pioneer3dx.xacro"/>
 
-    <!-- Spawn p3dx robot if gazebo is oppened -->
-    <include file="$(find p3dx_gazebo)/launch/p3dx.launch" required="true">
-        <arg name="ns" value="$(arg ns)"/>
-        <arg name="x" value="$(arg x)"/>
-        <arg name="y" value="$(arg y)"/>
-        <arg name="z" value="$(arg z)"/> 
-    </include>
+    <!-- Spawn robot-->
+    <group ns="$(arg ns)">
+        <param name="tf_prefix" value="$(arg ns)_tf" />
+        <include file="$(find tennis_bot)/launch/spawn.launch">
+            <arg name="name" value="$(arg ns)" />
+            <arg name="x" value="$(arg x)" />
+            <arg name="y" value="$(arg y)" />
+            <arg name="z" value="$(arg z)" />
+            <arg name="namespace_arg" value="$(arg ns)" />
+        </include>
+    </group>
 
     <!-- <node pkg="tennis_bot" name="teleop_key" type="teleop_key.py" output="screen"/> -->
 
