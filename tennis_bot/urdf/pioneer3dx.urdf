@@ -489,129 +489,173 @@ work original in ucs-ros-pkg.
     <child link="lms100"/>
   </joint>
 
-  <!-- Adicionando a vassoura -->
-  <material name="green">
-    <color rgba="0 0 0 1"/>
-  </material>
+		<!-- Adicionando a vassoura -->
+	<material name="green">
+		<color rgba="0 0 0 1"/>
+	</material>
 
-  <material name="brown">
-    <color rgba="0.5 0.25 0 1"/>
-  </material>
+	<material name="brown">
+		<color rgba="0.5 0.25 0 1"/>
+	</material>
 
-  <material name="pink">
-    <color rgba="1 0.078 0.576 1"/>
-  </material>
+	<material name="pink">
+		<color rgba="1 0.078 0.576 1"/>
+	</material>
 
-  <link name="z_cilinder_joint">
-    <visual>
-      <geometry>
-        <cylinder length="0.05" radius="0.025"/>
-      </geometry>
-      <material name="pink"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <collision>
-        <geometry>
-          <cylinder length="0.05" radius="0.025"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
-      </collision>
-    </visual>
-  </link>
+	<link name="z_cilinder_joint">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.025"/>
+			</geometry>
+			<material name="pink"/>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.05" radius="0.025"/>
+			</geometry>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+		</collision>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="0.000365" ixy="0.0" ixz="0.0" iyy="0.000365" iyz="0.0" izz="0.000313"/>
+		</inertial>
+	</link>
 
-  <joint name="z_cilinder_joint_to_robot" type="continuous">
-    <parent link="top_plate"/>
-    <child link="z_cilinder_joint"/>
-    <origin rpy="0 0 0" xyz="-0.2 0 0.025"/>
-    <axis xyz="0 0 1"/>
-  </joint>
+	<gazebo reference="z_cilinder_joint">
+		<material>Gazebo/Pink</material>
+	</gazebo>
 
-  <link name="y_cilinder_joint">
-    <visual>
-      <geometry>
-        <cylinder length="0.05" radius="0.025"/>
-      </geometry>
-      <material name="pink"/>
-      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
-      <collision>
-        <geometry>
-          <cylinder length="0.05" radius="0.025"/>
-        </geometry>
-        <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
-      </collision>
-    </visual>
-  </link>
+	<joint name="z_cilinder_joint_to_robot" type="continuous">
+		<parent link="top_plate"/>
+		<child link="z_cilinder_joint"/>
+		<origin rpy="0 0 0" xyz="-0.2 0 0.025"/>
+		<axis xyz="0 0 1"/>
+	</joint>
 
-  <joint name="y_cilinder_joint_to_robot" type="continuous">
-    <parent link="z_cilinder_joint"/>
-    <child link="y_cilinder_joint"/>
-    <origin rpy="0 0 0" xyz="0 0 0.025"/>
-    <axis xyz="0 1 0"/>
-  </joint>
+	<link name="y_cilinder_joint">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.025"/>
+			</geometry>
+			<material name="pink"/>
+			<origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.05" radius="0.025"/>
+			</geometry>
+			<origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+		</collision>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="0.000365" ixy="0.0" ixz="0.0" iyy="0.000365" iyz="0.0" izz="0.000313"/>
+		</inertial>
+	</link>
 
-  <link name="handle">
-    <visual>
-      <geometry>
-        <cylinder length="1" radius="0.025"/>
-      </geometry>
-      <material name="brown"/>
-      <origin rpy="0 0.78539816339 0" xyz="-0.35355339059 0 -0.35355339059"/>
-      <collision>
-        <geometry>
-          <cylinder length="1" radius="0.025"/>
-        </geometry>
-        <origin rpy="0 0.78539816339 0" xyz="-0.35355339059 0 -0.35355339059"/>
-      </collision>
-    </visual>
-  </link>
+	<gazebo reference="y_cilinder_joint">
+		<material>Gazebo/Pink</material>
+	</gazebo>
 
-  <joint name="handle_to_robot" type="fixed">
-    <parent link="y_cilinder_joint"/>
-    <child link="handle"/>
-    <origin rpy="0 0.78539816339 0" xyz="0 0 0"/>
-  </joint>
+	<joint name="y_cilinder_joint_to_robot" type="continuous">
+		<parent link="z_cilinder_joint"/>
+		<child link="y_cilinder_joint"/>
+		<origin rpy="0 0 0" xyz="0 0 0.025"/>
+		<axis xyz="0 1 0"/>
+	</joint>
 
-  <link name="brush_support">
-    <visual>
-      <geometry>
-        <box size="0.15 1.5 0.02"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="brown"/>
-    </visual>
-    <collision>
-      <geometry>
-        <box size="0.15 1.5 0.02"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </collision>
-  </link>
+	<link name="handle">
+		<visual>
+			<geometry>
+				<cylinder length="1" radius="0.025"/>
+			</geometry>
+			<material name="brown"/>
+			<origin rpy="0 0.78539816339 0" xyz="-0.35355339059 0 -0.35355339059"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="1" radius="0.025"/>
+			</geometry>
+			<origin rpy="0 0.78539816339 0" xyz="-0.35355339059 0 -0.35355339059"/>
+		</collision>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="0.083490" ixy="0.0" ixz="0.0" iyy="0.083490" iyz="0.0" izz="0.000313"/>
+		</inertial>
+	</link>
 
-  <joint name="handle_to_brush_support" type="fixed">
-    <parent link="handle"/>
-    <child link="brush_support"/>
-    <origin rpy="0 0 0" xyz="-0.70710678 0 -0.70710678"/>
-  </joint>
+	<gazebo reference="handle">
+		<material>Gazebo/Brown</material>
+	</gazebo>
 
-  <link name="brush">
-    <visual>
-      <geometry>
-        <box size="0.12 1.45 0.15"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 -0.075"/>
-      <material name="green"/>
-    </visual>
-    <collision>
-      <geometry>
-        <box size="0.12 1.45 0.15"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 -0.075"/>
-    </collision>
-  </link>
+	<joint name="handle_to_robot" type="fixed">
+		<parent link="y_cilinder_joint"/>
+		<child link="handle"/>
+		<origin rpy="0 0.78539816339 0" xyz="0 0 0"/>
+	</joint>
 
-  <joint name="suport_to_brush" type="fixed">
-    <parent link="brush_support"/>
-    <child link="brush"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-  </joint>
+	<link name="brush_support">
+		<visual>
+			<geometry>
+				<box size="0.15 1.5 0.02"/>
+			</geometry>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<material name="brown"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.15 1.5 0.02"/>
+			</geometry>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+		</collision>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="10"/>
+			<inertia ixx="1.875330" ixy="0.0" ixz="0.0" iyy="0.019080" iyz="0.0" izz="1.893750"/>
+		</inertial>
+	</link>
+
+	<gazebo reference="brush_support">
+		<material>Gazebo/Brown</material>
+	</gazebo>
+
+	<joint name="handle_to_brush_support" type="fixed">
+		<parent link="handle"/>
+		<child link="brush_support"/>
+		<origin rpy="0 0 0" xyz="-0.70710678 0 -0.70710678"/>
+	</joint>
+
+	<link name="brush">
+		<visual>
+			<geometry>
+				<box size="0.12 1.45 0.15"/>
+			</geometry>
+			<origin rpy="0 0 0" xyz="0 0 -0.075"/>
+			<material name="green"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.12 1.45 0.15"/>
+			</geometry>
+			<origin rpy="0 0 0" xyz="0 0 -0.075"/>
+		</collision>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="0.177083" ixy="0.0" ixz="0.0" iyy="0.003075" iyz="0.0" izz="0.176408"/>
+		</inertial>
+	</link>
+
+	<gazebo reference="brush">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<joint name="suport_to_brush" type="fixed">
+		<parent link="brush_support"/>
+		<child link="brush"/>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+	</joint>
 </robot>
-

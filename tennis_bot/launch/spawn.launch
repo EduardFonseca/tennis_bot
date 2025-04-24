@@ -8,7 +8,7 @@
     <arg name="namespace_arg" default=""/>
 
     <!-- Caminho para o modelo do robô -->
-    <arg name="robot_model" default="$(find tennis_bot)/urdf/pioneer3dx.urdf"/>
+    <arg name="robot_model" default="$(find tennis_bot)/urdf/pioneer3dx.xacro"/>
 
     <!-- Carrega o modelo URDF no ROS Parameter Server -->
     <param name="/robot_description" command="$(find xacro)/xacro --inorder '$(arg robot_model)'" />
