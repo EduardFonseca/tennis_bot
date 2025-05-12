@@ -20,6 +20,13 @@
     <!-- Carrega a descrição do robô no ROS Parameter Server antes de spawná-lo -->
     <param name="/robot_description" command="$(find xacro)/xacro --inorder $(find tennis_bot)/urdf/pioneer3dx.xacro"/>
 
+    <!-- Spawn SDF model da quadra -->
+    <node name="spawn_tennis_court" pkg="gazebo_ros" type="spawn_model" output="screen"
+            args="-file $(find tennis_bot)/models/quadra/model.sdf
+                -sdf
+                -model tennis_court
+                -x 0 -y 0 -z 0.0"/>
+
     <!-- Spawn robot-->
     <group ns="$(arg ns)">
         <param name="tf_prefix" value="$(arg ns)_tf" />
