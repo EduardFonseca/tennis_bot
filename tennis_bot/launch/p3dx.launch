@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+    <env name="GAZEBO_MODEL_PATH" value="$(find tennis_bot)/models"/>
+
     <arg name="world" default="empty" />
     <!-- Include empty world -->
     <arg name="ns" default="p3dx"/>
     <arg name="x" default="0.0" />
     <arg name="y" default="0.0" />
-    <arg name="z" default="0.0" />
+    <arg name="z" default="1.0" />
+    <arg name="extra_gazebo_args" default="--verbose"/>
 
     <!-- Start Gazebo empty_world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch" required="true">
         <arg name="world_name" value="$(find gazebo_ros)/worlds/$(arg world).world"/>
+        <!-- <arg name="world_name" value="$(find tennis_bot)/models/court/tennis_court.world" /> -->
+        <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)" />
     </include>
 
     <!-- Carrega a descrição do robô no ROS Parameter Server antes de spawná-lo -->
@@ -24,6 +29,7 @@
             <arg name="y" value="$(arg y)" />
             <arg name="z" value="$(arg z)" />
             <arg name="namespace_arg" value="$(arg ns)" />
+            
         </include>
     </group>
 
